@@ -12,4 +12,6 @@ def test_parse_argument(mock_parse_args,mock_add_argument):
      assert parse_argument() == MockArgs
      mock_parse_args.assert_called_once()
      mock_add_argument.assert_called_with("--file_path")
-
+     
+     
+# TODO: Missing test main function
