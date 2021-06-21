@@ -7,8 +7,12 @@ name = "pypi"
 flask = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3"
 
 [dev-packages]
 flask = "*"
 pytest = "*"
+pylint = "*"
+invoke = "*"
+pytest-cov = "*"
+pycodestyle = "*"
