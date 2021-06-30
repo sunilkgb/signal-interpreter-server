@@ -9,7 +9,8 @@ def test_my_routes_function():
     my_signal_interpreter_app_instance = my_signal_interpreter_app.test_client()
     
     with my_signal_interpreter_app_instance as client:
-        with patch.object(JsonParser, "get_signal_title", return_value = "ECU Reset"):
+        with patch.object(JsonParser, "get_signal_title", return_value = "ECU Reset") as mock_get_signal_title :
             my_payload = {"signal":"36"}
             response = client.post("/", json=my_payload)
+            mock_get_signal_title.assert_called_with("36")
             assert response.get_json() == "ECU Reset"

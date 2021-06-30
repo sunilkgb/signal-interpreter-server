@@ -2,12 +2,15 @@
 main function of the program
 """
 
+import logging
 from argparse import ArgumentParser
 from source import router
 from source.router import json_parser
 # from source.jason_parser import JsonParser
 # json_parser = JsonParser()
 # router.my_signal_interpreter_app.run()
+
+logger = logging.getLogger(__name__)
 
 
 def parse_argument():
@@ -29,7 +32,9 @@ def main():
     print(args.file_path)
     json_parser.load_file(args.file_path)
     # json_parser.get_signal_title("36")
+    logger.info("starting  the signal interpreter app")
     router.my_signal_interpreter_app.run()
+
 
 
 def init():

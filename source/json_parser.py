@@ -2,6 +2,11 @@
 json parser logic is covered in this file
 """
 import ast
+import logging
+from source.exceptions import InvalidsignalError, JsonParserError
+
+
+logger = logging.getLogger(__name__)
 
 
 class JsonParser:
@@ -9,6 +14,7 @@ class JsonParser:
     class to handle the json parser
     """
     def __init__(self):
+
         """
         intiate the variables
         """
@@ -20,8 +26,14 @@ class JsonParser:
         load a json file
         """
 
-        with open(file_path, "r") as my_file:
-            self.data = ast.literal_eval(my_file.read())
+        try:
+            with open(file_path, "r") as my_file:
+                self.data = ast.literal_eval(my_file.read())
+                logger.info("successfuly loaded %s", file_path)
+        except FileNotFoundError as err:
+            logger.exception("could not find %s", file_path)
+            raise JsonParserError from err
+
 
 
 
@@ -29,6 +41,9 @@ class JsonParser:
         """
             get signal title from the file
         """
-        for service in self.data["services"]: # pragma: no branch
-            if service["id"] == identifier: # pragma: no branch
-                return service["title"]
+        try:
+            for service in self.data["services"]: # pragma: no branch
+                if service["id"] == identifier: # pragma: no branch
+                    return service["title"]
+        except Exception as err:
+            raise InvalidsignalError(f"{identifier} not a valid signal") from err

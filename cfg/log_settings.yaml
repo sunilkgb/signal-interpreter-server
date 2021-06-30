@@ -1,0 +1,24 @@
+version: 1
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout
+
+  file:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    maxBytes: 10485760  # 10MB
+    backupCount: 20
+    formatter: simple
+    filename: debug.log
+
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+root:
+  level: NOTSET
+  handlers: [console, file]
