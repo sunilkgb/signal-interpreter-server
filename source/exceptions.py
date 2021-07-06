@@ -6,3 +6,6 @@ class InvalidsignalError(Exception):
 
 class JsonParserError(Exception):
     """ Unable to parse the json file """
+
+class SignalInterpreterServerException(Exception):
+    """ Signal Interpreter Server Exception"""

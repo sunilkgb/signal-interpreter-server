@@ -5,8 +5,12 @@ signal routing is handled in this file
 import logging
 from flask import Flask, request, jsonify, abort
 from source.json_parser import JsonParser
+from source.xml_parser import XmlParser
+from source.parser_factory import ParserFactory
 from source.exceptions import InvalidsignalError
 json_parser = JsonParser()
+xml_parser = XmlParser()
+parser_factory = ParserFactory()
 my_signal_interpreter_app = Flask(__name__)
 
 
@@ -27,7 +31,8 @@ def interpret_signal():
     """
     data = request.get_json()
     try:
-        signal_title = json_parser.get_signal_title(data["signal"])
+        # signal_title = json_parser.get_signal_title(data["signal"])
+        signal_title = parser_factory.get_parser().get_signal_title(data["signal"])
         return jsonify(signal_title)
     except KeyError as  err:
         logger.exception(err)

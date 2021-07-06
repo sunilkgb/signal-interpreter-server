@@ -9,7 +9,7 @@ import sys
 def test_get_signal_title(json_parser_instance):
     json_parser=JsonParser()
     json_parser.data=json_parser_instance.data
-    assert json_parser.get_signal_title("10") == "ECU Reset"
+    assert json_parser.get_signal_title("11") == "ECU Reset"
 
 
 # @pytest.mark.parametrize("payload, expected_status_code, expected_response", [
